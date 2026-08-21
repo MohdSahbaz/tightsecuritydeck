@@ -1,32 +1,76 @@
-# React + TypeScript + Vite
+# Tight Security ERP — Demo UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A polished, front-end-only demo of a **Security Workforce Management ERP** built for **Tight Security Ltd.**, a Uganda-based security services company. It showcases the full operational workflow a real ERP would cover — workforce, clients, sites, scheduling, deployment, attendance, leave, billing and reporting — running entirely on realistic mock data, with no backend required.
 
-Currently, two official plugins are available:
+**Live demo:** [tightsecuritydeck.vercel.app](https://tightsecuritydeck.vercel.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## What's inside
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Module | What it does |
+|---|---|
+| **Executive Overview** | Branch-wide KPIs, revenue vs. expenses, attendance trend, leave summary and deployment charts |
+| **Workforce & Guards** | Employee/guard master list, profile drawer, search & filters, add-employee form |
+| **Clients & Contracts** | Client directory with contract value, account manager and site count |
+| **Sites & Posts** | Per-site staffing status (fully staffed / understaffed / overstaffed) |
+| **Roster & Scheduling** | List and **calendar** views for shift assignments, with a day-detail drawer |
+| **Deployment** | Kanban-style board of guards by deployment status (deployed / standby / vacant / transferred) |
+| **Attendance** | Daily attendance log with check-in/out, overtime and status |
+| **Leave Management** | Leave requests with approve/reject actions and balances |
+| **Billing & Receivables** | Invoices, ageing buckets and collection summaries |
+| **Expenses & Procurement** | Expense records and purchase requests |
+| **Reports & Analytics** | Cross-module charts (workforce strength, overtime trend, client mix, overdue invoices) |
+| **Roles & Approvals** | Role-based access model and approval workflow reference |
+| **Settings** | Organisation profile, branches, departments and shift templates |
 
-## Expanding the Oxlint configuration
+Every "Add" action opens a real form (pre-filled with sensible dummy data) that updates the in-memory dataset on submit — nothing touches a server, so the whole app is safe to click through freely.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## Tech stack
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+- **React 19** + **TypeScript**
+- **Vite** for dev/build tooling
+- **Tailwind CSS v4**
+- **React Router** for client-side routing
+- **Recharts** for charts
+- **Lucide React** for icons
+
+No backend, no database, no auth server — all data lives in [`src/lib/mockData.ts`](src/lib/mockData.ts) and is generated deterministically so the demo looks the same on every reload.
+
+## Getting started
+
+```bash
+npm install
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+The app runs at `http://localhost:5173`.
+
+Other scripts:
+
+```bash
+npm run build     # type-check and build for production
+npm run preview   # preview the production build locally
+npm run lint       # run Oxlint
+```
+
+## Project structure
+
+```
+src/
+├── assets/         # logo and static images
+├── components/
+│   ├── Layout.tsx  # sidebar, topbar, notifications & profile menus
+│   └── ui.tsx       # shared UI kit (cards, tables, modals, form fields, badges…)
+├── lib/
+│   ├── mockData.ts  # all seed data + generators
+│   └── types.ts     # shared TypeScript types
+├── pages/           # one file per module/route
+├── App.tsx          # route definitions
+└── main.tsx         # app entry point
+```
+
+## Notes
+
+- This is a **standalone project** — it does not depend on, or share code with, any other repository it may sit alongside.
+- Built for client presentation purposes; there is no live data connection or persistence beyond the current browser session.
