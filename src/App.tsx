@@ -3,6 +3,7 @@ import Layout from "./components/Layout";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Workforce from "./pages/Workforce";
+import Recruitment from "./pages/Recruitment";
 import Clients from "./pages/Clients";
 import Sites from "./pages/Sites";
 import Roster from "./pages/Roster";
@@ -22,6 +23,7 @@ export default function App() {
       <Route element={<Layout />}>
         <Route path="/" element={<Dashboard />} />
         <Route path="/workforce" element={<Workforce />} />
+        <Route path="/recruitment" element={<Recruitment />} />
         <Route path="/clients" element={<Clients />} />
         <Route path="/sites" element={<Sites />} />
         <Route path="/roster" element={<Roster />} />

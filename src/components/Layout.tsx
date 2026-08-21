@@ -19,6 +19,7 @@ import {
   Menu,
   AlertTriangle,
   UserCircle,
+  UserPlus,
   LogOut,
   Building,
   CheckCheck,
@@ -43,6 +44,7 @@ function useClickOutside(onOutside: () => void) {
 const nav = [
   { to: "/", label: "Overview", icon: LayoutDashboard, end: true },
   { to: "/workforce", label: "Workforce & Guards", icon: Users },
+  { to: "/recruitment", label: "Recruitment", icon: UserPlus },
   { to: "/clients", label: "Clients & Contracts", icon: Handshake },
   { to: "/sites", label: "Sites & Posts", icon: Building2 },
   { to: "/roster", label: "Roster & Scheduling", icon: CalendarClock },

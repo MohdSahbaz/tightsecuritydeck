@@ -10,6 +10,8 @@ import type {
   PurchaseRequest,
   Incident,
   Deployment,
+  Vacancy,
+  Candidate,
 } from "./types";
 
 // deterministic pseudo-random so the demo looks identical on every load/refresh
@@ -269,6 +271,54 @@ export const incidents: Incident[] = Array.from({ length: 18 }).map((_, i) => ({
   date: dateOffset(-randInt(0, 20)),
   status: pick(["Open", "Investigating", "Resolved", "Resolved"]),
 }));
+
+const openPositions = ["Security Guard", "Site Supervisor", "Shift Commander", "K9 Handler", "Control Room Operator", "Operations Staff"];
+
+export const vacancies: Vacancy[] = Array.from({ length: 12 }).map((_, i) => {
+  const openings = randInt(1, 6);
+  return {
+    id: `VAC-${i + 1}`,
+    position: pick(openPositions),
+    department: pick(departments),
+    branch: pick(branches),
+    openings,
+    applicants: randInt(0, openings * 8),
+    status: pick(["Open", "Open", "On Hold", "Closed", "Filled"]),
+    postedDate: dateOffset(-randInt(5, 60)),
+    closingDate: dateOffset(randInt(5, 30)),
+  };
+});
+
+export const candidates: Candidate[] = Array.from({ length: 45 }).map((_, i) => {
+  const vacancy = pick(vacancies);
+  const isFemale = rand() > 0.75;
+  const name = isFemale ? pick(femaleNames) : pick(maleNames);
+  const stage: Candidate["stage"] = pick([
+    "Applied",
+    "Applied",
+    "Shortlisted",
+    "Interview Scheduled",
+    "Interviewed",
+    "Offered",
+    "Hired",
+    "Rejected",
+    "Rejected",
+  ]);
+  const hasInterview = stage === "Interview Scheduled" || stage === "Interviewed" || stage === "Offered" || stage === "Hired";
+  return {
+    id: `CAN-${i + 1}`,
+    name: `${name} ${i > 30 ? randInt(2, 9) : ""}`.trim(),
+    vacancyId: vacancy.id,
+    appliedFor: vacancy.position,
+    phone: `+256 7${randInt(10, 99)} ${randInt(100, 999)} ${randInt(100, 999)}`,
+    email: `${name.toLowerCase().replace(/\s+/g, ".")}@gmail.com`,
+    experienceYears: randInt(0, 10),
+    source: pick(["Walk-in", "Referral", "Online Portal", "Recruitment Agency"]),
+    stage,
+    appliedDate: dateOffset(-randInt(1, 45)),
+    interviewDate: hasInterview ? dateOffset(randInt(-10, 10)) : null,
+  };
+});
 
 export const revenueTrend = [
   { month: "Mar", revenue: 178, expenses: 112 },

@@ -141,3 +141,29 @@ export interface Deployment {
   startDate: string;
   status: "Deployed" | "Standby" | "Vacant" | "Transferred";
 }
+
+export interface Vacancy {
+  id: string;
+  position: string;
+  department: string;
+  branch: string;
+  openings: number;
+  applicants: number;
+  status: "Open" | "On Hold" | "Closed" | "Filled";
+  postedDate: string;
+  closingDate: string;
+}
+
+export interface Candidate {
+  id: string;
+  name: string;
+  vacancyId: string;
+  appliedFor: string;
+  phone: string;
+  email: string;
+  experienceYears: number;
+  source: "Walk-in" | "Referral" | "Online Portal" | "Recruitment Agency";
+  stage: "Applied" | "Shortlisted" | "Interview Scheduled" | "Interviewed" | "Offered" | "Hired" | "Rejected";
+  appliedDate: string;
+  interviewDate: string | null;
+}
